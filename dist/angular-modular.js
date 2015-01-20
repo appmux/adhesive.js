@@ -1,8 +1,25 @@
 /**
- * ngModular: Modular AngularJS
+ * ngModular: Provides modular file structure with auto-loading capabilities for AngularJS applications
  *
- * @license ngAngular 1.0.3
- * @url https://github.com/appmux/angular.js/
+ * Features
+ * - Organize AngularJS applications and modules into a flexible file structure.
+ * - Split modules into separate files, i.e. FooController.js, BarController.js, FooService.js, etc.
+ * - Create independent shareable modules.
+ * - Load modules on the fly, after the applications has been bootstrapped.
+ * - Leverage path-to-module resolution with module auto loading capability.
+ * - Decrease initial load time by loading only modules required to initialize the application, i.e. index module.
+ * - Organize and share generic application level components accessible by all modules, i.e. filters, directives, etc.
+ * - Provide higher security by loading secure modules after authentication.
+ * - Build flexible and scalable applications.
+ * - Easy for development, solid for production.
+ * - Minification ready.
+ *
+ * Dependencies
+ * - require.js
+ * - ngRoute
+ *
+ * @license adhesive.js 1.0.3
+ * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh
  * License: MIT
@@ -10,7 +27,7 @@
 
 (function(window, require, angular, undefined) {'use strict';
 
-    var modular = angular.module('ngModular', ['ng', 'ngRoute']);
+    var modular = angular.module('ngModular', ['ngRoute']);
 
     modular.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
         function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {

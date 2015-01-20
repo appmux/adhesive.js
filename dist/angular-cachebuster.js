@@ -1,3 +1,19 @@
+/**
+ * ngCacheBuster: Cache buster for AngularJS applications
+ *
+ * Features
+ * - Automatically reset browser cache for static files used in AngularJS application.
+ * - No hassle development, see changes immediately on reload, no browser tweaks needed.
+ * - Ensure users receive the latest version of files on application release.
+ * - Keep static files cacheable in production environment between versions.
+ * - No server configuration needed.
+ *
+ * @license adhesive.js 1.0.3
+ * @url https://github.com/appmux/adhesive.js
+ * @author Alexander Korzh
+ * Copyright (c) 2014 Alexander Korzh
+ * License: MIT
+ */
 
 (function (window, angular, undefined) {
     'use strict';
