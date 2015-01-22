@@ -1,9 +1,9 @@
 adhesive.js
 ==========
 
-adhesive.js framework that delivers essential components for integration of AngilarJS with the real world. Define your project file structure and leverage modules you were looking for forever to build and deliver your SPA application. This framework turns the development nightmare into a pure pleasure, no more a 1000 lines source code files, no more struggling with browser cache during development or a production release, non of that nonsense...
+adhesive.js framework delivers essential components for integration of AngilarJS with the real world. Define your project file structure and leverage modules you were looking for forever to build and deliver your SPA. This framework turns the development nightmare into a pure pleasure, no more a 1000 lines source code files, no more struggling with browser cache during development or a production release, non of that nonsense...
 
-The framework is proven to work with multiple large-scale mission-critical applications over 6 months now, lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
+The framework has been test driven in production environment and is proven to work with multiple large-scale mission-critical applications over 6 months before was released, lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
 
 adhesive.js created with developers in mind, it's completely open for any kind of customizations via different patterns, starting with simple configuration to implementation of custom strategies.
 
@@ -53,3 +53,10 @@ adhesive.js components are independent, you can mix and match and add salt to ta
 - Ensure users receive the latest version of files on application release.
 - Keep static files cacheable in production environment between versions.
 - No server configuration needed.
+
+<h3>ngIntercom</h3>
+<p>Allows two-way communication via eventing between AngularJS and other JavaScript applications.</p>
+
+<h4>Features</h4>
+- Send events to AngularJS application from outside world.
+- Send events to outside world from AngularJS application.
