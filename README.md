@@ -1,5 +1,5 @@
-adhesive.js
-==========
+adhesive.js for AngularJS
+=========================
 
 adhesive.js framework delivers essential components for integration of AngilarJS with the real world. Components are independent and can be used individually.
 
@@ -7,10 +7,10 @@ Define your project file structure and leverage modules you were looking for for
 
 The framework has been test driven in production environment and is proven to work with multiple large-scale mission-critical applications for over 6 months before it was released to the public. It lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
 
-adhesive.js created with developers in mind, it's completely open for any kind of customizations via different design patterns, starting with simple configuration to implementation of custom strategies.
+adhesive.js created with developers in mind, it's completely open for any kind of customization via different design patterns, starting with simple configuration to implementation of custom strategies.
 
 Demo
-====
+----
 See the live <a href="http://plnkr.co/edit/CcGw4apNYtsLoT33kfAc">demo of adhesive.js</a> to believe.
 
 Components
