@@ -1,11 +1,13 @@
 adhesive.js
 ==========
 
-adhesive.js framework delivers essential components for integration of AngilarJS with the real world. Define your project file structure and leverage modules you were looking for forever to build and deliver your SPA. This framework turns the development nightmare into a pure pleasure, no more a 1000 lines source code files, no more struggling with browser cache during development or a production release, non of that nonsense...
+adhesive.js framework delivers essential components for integration of AngilarJS with the real world. Components are independent and can be used individually.
 
-The framework has been test driven in production environment and is proven to work with multiple large-scale mission-critical applications over 6 months before was released, lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
+Define your project file structure and leverage modules you were looking for forever to build and deliver your SPA. This framework turns the development nightmare into a pure pleasure, no more a 1000 lines source code files, no more struggling with browser cache during development or a production release, none of that nonsense...
 
-adhesive.js created with developers in mind, it's completely open for any kind of customizations via different patterns, starting with simple configuration to implementation of custom strategies.
+The framework has been test driven in production environment and is proven to work with multiple large-scale mission-critical applications for over 6 months before it was released to the public. It lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
+
+adhesive.js created with developers in mind, it's completely open for any kind of customizations via different design patterns, starting with simple configuration to implementation of custom strategies.
 
 Demo
 ====
