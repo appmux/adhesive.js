@@ -56,6 +56,16 @@ adhesive.js components are independent, you can mix and match and add salt to ta
 - Keep static files cacheable in production environment between versions.
 - No server configuration needed.
 
+<h3>ngTitle</h3>
+<p>Allows to set and update the page title from a route, controller and a template.</p>
+
+<h4>Features</h4>
+- Set the title via the route configuration.
+- Set the title from the controller.
+- Set the title from the template using data-page-title element ot attribute, with support for bound variables.
+
+See <a href="http://plnkr.co/edit/OzXVbGIgemABVIbq9Axg">ngTitle demo</a>.
+
 <h3>ngIntercom</h3>
 <p>Allows two-way communication via eventing between AngularJS and other JavaScript applications.</p>
 

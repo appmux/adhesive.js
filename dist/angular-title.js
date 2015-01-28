@@ -1,5 +1,5 @@
 /**
- * ngTitle: Allows to set and update the page title
+ * ngTitle: Allows to set and update the page title from a route, controller and a template
  *
  * Features
  * - Set the title via the route configuration.
