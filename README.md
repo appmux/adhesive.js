@@ -1,13 +1,13 @@
 adhesive.js for AngularJS
 =========================
 
-adhesive.js framework for AngularJS delivers essential components for integration of angular with the real world. It brings the AMD concept to the angular and allows to define the project file structure and leverage module lazy-loading as well as a set of other useful modules to build and deliver great single-page applications. Components are independent and can be used individually.
+adhesive.js framework for AngularJS delivers essential components for integration of angular with the real world. It brings the AMD concept to angular and allows you to define the project's file structure and to leverage lazy-loading of modules. It also includes a set of other useful modules to build and deliver great single-page applications. Components are independent and can be used individually.
 
-The framework turns the development nightmare into a pure pleasure, no more a 1000 lines source code files, no more struggling with browser cache during development or a production release, none of that nonsense...
+The framework turns the development nightmare into pure pleasure, no more thousand-line source code files, no more struggling with browser cache during development or a production release, none of that nonsense...
 
-It has been test driven in production environment and is proven to work with multiple large-scale mission-critical applications for over 6 months before it was released to the public. It lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
+It has been test driven in production environments and is proven to work with multiple large-scale mission-critical applications for over 6 months before it was released to the public. It has lived through several AngularJS version upgrades since 1.9.3 and demonstrated scalability, great performance and high reliability.
 
-adhesive.js created with developers in mind, it's completely open for any kind of customization via different design patterns, starting with simple configuration to implementation of custom strategies.
+adhesive.js is created with developers in mind. It's completely open for any kind of customization via different design patterns, starting with simple configuration to implementation of custom strategies.
 
 Demo
 ----
@@ -16,7 +16,7 @@ See the live <a href="http://plnkr.co/edit/CcGw4apNYtsLoT33kfAc">demo of adhesiv
 Components
 ==========
 
-adhesive.js components are independent, you can mix and match and add salt to taste.
+adhesive.js components are independent, you can mix and match and season to taste.
 
 <h3>ngModular</h3>
 <p>Provides modular file structure with auto-loading capabilities for AngularJS applications.</p>
@@ -44,14 +44,14 @@ adhesive.js components are independent, you can mix and match and add salt to ta
 <h4>Features</h4>
 - Leverage centralized configuration file for easier maintenance.
 - Make your modules flexible via configuration.
-- Build your modules application agnostic, independent and sharable.
+- Build your modules to be application-agnostic, independent and sharable.
 
 <h3>ngCacheBuster</h3>
 <p>Cache buster for AngularJS applications.</p>
 
 <h4>Features</h4>
 - Automatically reset browser cache for static files used in AngularJS application.
-- No hassle development, see changes immediately on reload, no browser tweaks needed.
+- No-hassle development, see changes immediately on reload, no browser tweaks needed.
 - Ensure users receive the latest version of files on application release.
 - Keep static files cacheable in production environment between versions.
 - No server configuration needed.
