@@ -1,14 +1,7 @@
 'use strict';
 
 require.config({
-  
-  // We tell require to use this argument to bust the cache.
-  urlArgs: 'b=' + BUILD_NUMBER,
-  
-  // Script load timout, should not be too low for slower connection,
-  // i.e. over VPN
-  waitSeconds: 20,
-  
+
   // Regular require config to define resources
   paths: {
     // jQuery
@@ -23,6 +16,7 @@ require.config({
     'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
     'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
     'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
+    'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
 
     // Third-party libraries
     // Add more third-party libraries as needed.
@@ -80,6 +74,7 @@ require.config({
     'angularConfig': ['angular'],
     'angularModular': ['angular'],
     'angularCacheBuster': ['angular'],
+    'angularTitle': ['angular'],
 
     'module/app': [
       'angular',
@@ -87,7 +82,8 @@ require.config({
       'angularUi',
       'angularConfig',
       'angularModular',
-      'angularCacheBuster'
+      'angularCacheBuster',
+      'angularTitle'
     ]
   },
   priority: [
@@ -112,14 +108,14 @@ require([
     // Again, I like to call it app, but the name can be different and it has
     // nothing to do with module/app mentioned above.
     angular.module('app', [
-      'ngRoute', 'ngConfig', 'ngModular', 'ngCacheBuster', 'ui.bootstrap'
+      'ngRoute', 'ngConfig', 'ngModular', 'ngCacheBuster', 'ngTitle', 'ui.bootstrap'
     ])
     
       // At the onfiguration stage of angular's bootstrap process we pull some
       // dependencies to configure them. All this stuff is optional and exists
       // here only for demonstration of how it can be done when needed.
-      .config(['configProvider', 'cacheBusterProvider', 'autoLoaderProvider',
-        function(configProvider, cacheBusterProvider, autoLoaderProvider) {
+      .config(['configProvider', 'cacheBusterProvider', 'autoLoaderProvider', 'pageTitleProvider',
+        function(configProvider, cacheBusterProvider, autoLoaderProvider, pageTitleProvider) {
           
           // We tell ngConfig to use our configuration object to make it
           // available across the entire application as an injectable
@@ -146,6 +142,10 @@ require([
               }
             ]
           });
+
+          // Optional configuration for ngTitle
+          pageTitleProvider.setPostfix(config.default.pageTitle);
+          //pageTitleProvider.setDelimiter(' | ');
         }
       ]);
       

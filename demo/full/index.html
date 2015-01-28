@@ -77,6 +77,16 @@ directive, we are not doing auto-bootstrap.
   Proceed to the app/init.js
   -->
   <script data-main="app/init" src="http://requirejs.org/docs/release/2.1.14/minified/require.js"></script>
-  
-  </body>
+  <script>
+    require.config({
+      // We tell require to use this argument to bust the cache.
+      urlArgs: 'b=' + BUILD_NUMBER,
+
+      // Script load timout, should not be too low for slower connection,
+      // i.e. over VPN
+      waitSeconds: 30
+    });
+  </script>
+
+</body>
 </html>

@@ -28,7 +28,8 @@ define([
                 '/example/foo': {templateUrl: 'app/module/example/view/example.html', controller: 'FooController'},
                 '/example/bar': {
                     templateUrl: 'app/module/example/view/example.html',
-                    controller: 'BarController'
+                    controller: 'BarController',
+                    title: 'Bar'
                 }
             }
         };

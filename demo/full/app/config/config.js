@@ -8,6 +8,7 @@ define([], function () {
     return {
         // Some default options
         default: {
+            pageTitle: 'Demo',
             path: '/',
             moduleNotFound: '/module-not-found'
         },
@@ -22,7 +23,7 @@ define([], function () {
                     /view\/[^\.]*\.html/g
                 ],
                 urlParams: {b: BUILD_NUMBER}
-            },
+            }
         }
     };
 
