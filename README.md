@@ -9,6 +9,8 @@ It has been test driven in production environments and is proven to work with mu
 
 adhesive.js is created with developers in mind. It's completely open for any kind of customization via different design patterns, starting with simple configuration to implementation of custom strategies.
 
+Follow on: <a href="https://twitter.com/appmux">Twitter</a>
+
 Demo
 ----
 See the live <a href="http://plnkr.co/edit/CcGw4apNYtsLoT33kfAc">demo of adhesive.js</a> to believe.
