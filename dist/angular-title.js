@@ -88,7 +88,7 @@
                 };
             }
         })
-        .directive('title', function ($compile, pageTitle) {
+        .directive('title', ['pageTitle', function (pageTitle) {
             return {
                 restrict: 'E',
                 link: function (scope, element, attrs) {
@@ -102,8 +102,8 @@
                     );
                 }
             };
-        })
-        .directive('pageTitle', function ($compile, pageTitle) {
+        }])
+        .directive('pageTitle', ['pageTitle', function (pageTitle) {
             return {
                 restrict: 'EA',
                 link: function (scope, element, attrs) {
@@ -119,6 +119,6 @@
                     ));
                 }
             };
-        });
+        }]);
 
 })(window, window.angular);
