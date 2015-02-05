@@ -37,7 +37,7 @@ define([],
             // the module is laoded.
             init: function ($rootScope, $location, config) {
                 console.log('module/app loaded.');
-                
+
                 // For example, we set a hndler for 'moduleNotFound' event that
                 // simply forwards to the module not found page.
                 $rootScope.$on('moduleNotFound', function (event, module) {

@@ -29,7 +29,8 @@ define([
                 '/example/bar': {
                     templateUrl: 'app/module/example/view/example.html',
                     controller: 'BarController',
-                    title: 'Bar'
+                    title: 'Bar',
+                    requireAccess: ['beer-crud', 'wine-r']
                 }
             }
         };

@@ -23,6 +23,14 @@ define([], function () {
                     /view\/[^\.]*\.html/g
                 ],
                 urlParams: {b: BUILD_NUMBER}
+            },
+            ngAuth: {
+                routes: {
+                    '/example': {requireAccess: []},
+                    '/example/bar': {requireAccess: ['basic-r']},
+                    '/example/foo': {requireAccess: ['denied-crud']}
+                }
+
             }
         }
     };

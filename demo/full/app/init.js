@@ -16,7 +16,14 @@ require.config({
     'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
     'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
     'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
+    'angularAuth': '//rawgit.com/appmux/adhesive.js/master/dist/angular-auth',
     'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
+
+    //'angularConfig': '../lib/adhesivejs/angular-config',
+    //'angularModular': '../lib/adhesivejs/angular-modular',
+    //'angularCacheBuster': '../lib/adhesivejs/angular-cachebuster',
+    //'angularAuth': '../lib/adhesivejs/angular-auth',
+    //'angularTitle': '../lib/adhesivejs/angular-title',
 
     // Third-party libraries
     // Add more third-party libraries as needed.
@@ -74,6 +81,7 @@ require.config({
     'angularConfig': ['angular'],
     'angularModular': ['angular'],
     'angularCacheBuster': ['angular'],
+    'angularAuth': ['angular'],
     'angularTitle': ['angular'],
 
     'module/app': [
@@ -83,6 +91,7 @@ require.config({
       'angularConfig',
       'angularModular',
       'angularCacheBuster',
+      'angularAuth',
       'angularTitle'
     ]
   },
@@ -91,7 +100,7 @@ require.config({
   ]
 });
 
-// We all set up and ready for action. Let'start loading files.
+// We all set up and ready for action. Let's start loading files.
 require([
   'app/config',
   'module/app',
@@ -108,15 +117,15 @@ require([
     // Again, I like to call it app, but the name can be different and it has
     // nothing to do with module/app mentioned above.
     angular.module('app', [
-      'ngRoute', 'ngConfig', 'ngModular', 'ngCacheBuster', 'ngTitle', 'ui.bootstrap'
+      'ngRoute', 'ngConfig', 'ngModular', 'ngCacheBuster', 'ngAuth', 'ngTitle', 'ui.bootstrap'
     ])
     
-      // At the onfiguration stage of angular's bootstrap process we pull some
+      // At the configuration stage of angular's bootstrap process we pull some
       // dependencies to configure them. All this stuff is optional and exists
       // here only for demonstration of how it can be done when needed.
-      .config(['configProvider', 'cacheBusterProvider', 'autoLoaderProvider', 'pageTitleProvider',
-        function(configProvider, cacheBusterProvider, autoLoaderProvider, pageTitleProvider) {
-          
+      .config(['configProvider', 'cacheBusterProvider', 'autoLoaderProvider', 'authServiceProvider', 'pageTitleProvider',
+        function(configProvider, cacheBusterProvider, autoLoaderProvider, authServiceProvider, pageTitleProvider) {
+
           // We tell ngConfig to use our configuration object to make it
           // available across the entire application as an injectable
           // dependency 'config'.
@@ -126,7 +135,7 @@ require([
           cacheBusterProvider.setPaths(config.ngModule.ngCacheBuster.paths);
           cacheBusterProvider.setUrlParams(config.ngModule.ngCacheBuster.urlParams);
 
-          // Example of implementaiton of a custom auto-loader's
+          // Example of implementation of a custom auto-loader's
           // path-to-module resolution function.
           autoLoaderProvider.addStrategy({
             name: 'alias',
@@ -143,11 +152,115 @@ require([
             ]
           });
 
+          var authServiceAdapter = ['$http', '$q', function ($http, $q) {
+            var user = null;
+
+            function isLoggedIn() {
+              return user !== null;
+            }
+
+            function register(data) {
+              user = data;
+              //$cookies[authCookie] = user.username;
+            }
+
+            function unregister() {
+              user = null;
+              //delete $cookies[authCookie];
+            }
+
+            return {
+              logIn: function (credentials) {
+                // Simulate an auth web service call to log user in
+                var deferred = $q.defer();
+
+                setTimeout(function () {
+                  register({
+                    displayName: credentials.username,
+                    permissions: ['read', 'write']
+                  });
+
+                  deferred.resolve({
+                    displayName: credentials.username
+                  });
+                }, 1000);
+
+                return deferred.promise;
+              },
+
+              logOut: function () {
+                // Simulate an auth web service call to log user out
+                var deferred = $q.defer();
+
+                setTimeout(function () {
+                  var username = user.username;
+                  unregister();
+
+                  deferred.resolve(username);
+                }, 1000);
+
+                return deferred.promise;
+              },
+
+              isLoggedIn: isLoggedIn,
+
+              hasAccess: function (requireAccess) {
+                return true;
+              }
+            }
+          }];
+
+          authServiceProvider.setAdapter(authServiceAdapter);
+
+          // This strategy is ngModular specific,
+          // it allows to require authenticate before a module is even loaded
+          // TODO Update to use regex
+          authServiceProvider.addStrategy({
+            name: 'protectedModules',
+            getRequiredAccess: ['$location', function ($location) {
+              var protectedRoutes = config.ngModule.ngAuth.routes,
+                  path = $location.path(),
+                  requireAccess;
+
+              if (protectedRoutes.hasOwnProperty(path)) {
+                if (protectedRoutes[path].hasOwnProperty('requireAccess')) {
+                  requireAccess = protectedRoutes[path].requireAccess;
+                } else {
+                  // According to our authServiceAdapter, empty object/array requires user to be logged in.
+                  requireAccess = [];
+                }
+              }
+
+              return requireAccess;
+            }]});
+
           // Optional configuration for ngTitle
           pageTitleProvider.setPostfix(config.default.pageTitle);
           //pageTitleProvider.setDelimiter(' | ');
         }
-      ]);
+      ])
+      .run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
+
+        // When user has been logged in.
+        $rootScope.$on('ng.auth.loggedIn', function (event, data) {
+          var requestedUri = authService.getRequestedUri(),
+              path = typeof requestedUri == 'object' && requestedUri.hasOwnProperty('path') ? requestedUri.path : config.default.path,
+              search = typeof requestedUri == 'object' && requestedUri.hasOwnProperty('search') ? requestedUri.search : {};
+
+          // Capture username, so we can use it later in our UI, i.e. to display the name of logged in user.
+          $rootScope.username = data.displayName;
+
+          // Redirect to the originally requested URL, after log in.
+          $location.path(path).search(search);
+        });
+
+        // When a user has been logged out.
+        $rootScope.$on('ng.auth.loggedOut', function (event, data) {
+
+          // Redirect to the default path on log out.
+          $location.path(config.default.path).search({});
+        });
+      }]);
       
       // Here we call the ngModular module that will drive the rest of the
       // application. This very module allows to have the application better
