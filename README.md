@@ -42,6 +42,16 @@ adhesive.js components are independent, you can mix and match and season to tast
 - require.js
 - ngRoute
 
+<h3>ngAuth</h3>
+<p>Provides the core of the authentication mechanism for AngularJS applications.</p>
+
+<h4>Features</h4>
+- Overridable default templates and controllers.
+- Extendable via implementation of a custom authServiceAdapter.
+- Reach set of events.
+- Flexible for development.
+- Provides ability to build secure applications.
+
 <h3>ngConfig</h3>
 <p>Application configuration provider for AngularJS applications.</p>
 
