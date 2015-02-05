@@ -49,7 +49,7 @@
                         _title.push(_postfix);
                     }
 
-                    if (next.title && next.title != '') {
+                    if (next && next.title && next.title != '') {
                         _title.push(next.title);
                     }
                 });
