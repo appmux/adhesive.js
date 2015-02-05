@@ -24,70 +24,86 @@ directive, we are not doing auto-bootstrap.
   Build number is very important thing here. It's used for cache buster
   to make sure all files are up to date on every load during the development
   and on every release in production.
-  
+
   In production you would use a static string, i.e. version or an actual
   build number, so it would look something like:
   <script>var BUILD_NUMBER = '1.0.1';</script>
   -->
-  <script>var BUILD_NUMBER = new Date(); BUILD_NUMBER = BUILD_NUMBER.getTime();</script>
+  <script>var BUILD_NUMBER = new Date();
+  BUILD_NUMBER = BUILD_NUMBER.getTime();</script>
 </head>
 
 <body>
-  <header class="container">
-    <h1>adhesive.js for AngularJS applications full-scale demo and tutorial</h1>
-    
-    <p>This sample application is built based on ngModular, which automatically resolves
+<header class="container">
+  <h1>adhesive.js for AngularJS applications full-scale demo and tutorial</h1>
+
+  <p>This sample application is built based on ngModular, which automatically resolves
     paths and downloads application modules on demand, as you walk through
     the app. See it in action by watching the Network tab
     in the developer console.</p>
-    
-    <h3>Example links</h3>
-    <ul>
-      <li><a href="#/">Index module</a> - go back to the index view.</li>
-      <li><a href="#/example">Load Example module</a> - demonstrates dynamic
-      routing, on demand auto-loading.</li>
-      <li><a href="#/test">Example (#/test)</a> - alias route, uses custom resolution
-      for auto-loader.</li>
-      <li><a href="#/non-existing-module">Non-existing module</a> - handle
-      an event when module was not found.</li>
-      <li><a href="#/login">Log in</a> | <a href="#/logout">Log out</a> - authentication.</li>
-    </ul>
-    <hr>
-  </header>
 
-  <section class="container" id="body">
-    <!--
-    The place for the view rendered by AngularJS.
-    -->
-    <div data-ng-view>
-      Loading...
-    </div>
-  </section>
-  
-  <footer class="container">
-    <hr>
-    <p>ngModular and other modules are the part of the <a href="https://github.com/appmux/adhesive.js">adhesive.js framework</a>, check it out on the GitHub.</p>
-    <p style="font-style: italic;">I must admit, I am impressed with ability of Plunker to handle such a complex plunk as this one. Bravo!</p>
-    <p>- Appmux</p>
-  </footer>
+  <h3>Menu</h3>
+  <ul>
+    <li><a href="#/">Home</a> - modue/index, go back to the home page.</li>
+    <li><a href="#/example">Example</a> - module/example, originally not pre-loaded, demonstrates dynamic
+      routing and on demand auto-loading.
+    </li>
+    <li><a href="#/test">Example (#/test)</a> - module/example, demonstrates alias routing, uses custom resolution
+      for auto-loader.
+    </li>
+    <li><a href="#/blog">Blog</a> - module/blog, demonstrates permissions handled by ngAuth module.</li>
+    <li><a href="#/non-existing-module">Non-existing module</a> - there's no module to serve this route,
+      demonstrates
+      handling of a case when module was not found.
+    </li>
+    <li data-ng-show="!auth.loggedIn">
+      <a href="#/login">Log in</a> - ngAuth, use any random credentials to log in, if login and password matches
+      authentication will be denied.
+    </li>
+    <li data-ng-show="auth.loggedIn">
+      <a href="#/logout">Log out</a> (Logged in as: {{auth.displayName}})
+    </li>
+  </ul>
+  <hr>
+</header>
 
+<section class="container" id="body">
   <!--
-  We load require.js and point it to the app/init.js script to initialize the app.
-  Note, this is the only script we load here, everything else is handled
-  by the require.
-  Proceed to the app/init.js
+  The place for the view rendered by AngularJS.
   -->
-  <script data-main="app/init" src="http://requirejs.org/docs/release/2.1.14/minified/require.js"></script>
-  <script>
-    require.config({
-      // We tell require to use this argument to bust the cache.
-      urlArgs: 'b=' + BUILD_NUMBER,
+  <div data-ng-view>
+    Loading...
+  </div>
+</section>
 
-      // Script load timout, should not be too low for slower connection,
-      // i.e. over VPN
-      waitSeconds: 30
-    });
-  </script>
+<footer class="container">
+  <hr>
+  <p>ngModular and other modules are the part of the <a href="https://github.com/appmux/adhesive.js">adhesive.js
+    framework</a>, check it out on the GitHub.</p>
+
+  <p style="font-style: italic;">I must admit, I am impressed with ability of Plunker to handle such a complex plunk
+    as this one. Bravo!</p>
+
+  <p>- Appmux</p>
+</footer>
+
+<!--
+We load require.js and point it to the app/init.js script to initialize the app.
+Note, this is the only script we load here, everything else is handled
+by the require.
+Proceed to the app/init.js
+-->
+<script data-main="app/init" src="http://requirejs.org/docs/release/2.1.14/minified/require.js"></script>
+<script>
+  require.config({
+    // We tell require to use this argument to bust the cache.
+    urlArgs: 'b=' + BUILD_NUMBER,
+
+    // Script load timout, should not be too low for slower connection,
+    // i.e. over VPN
+    waitSeconds: 30
+  });
+</script>
 
 </body>
 </html>
