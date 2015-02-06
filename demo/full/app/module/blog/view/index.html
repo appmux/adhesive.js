@@ -1,0 +1,11 @@
+<h2>My Blog</h2>
+<p data-ng-show="!auth.loggedIn">
+  <a href="#/login">Log in</a> to be able to blog.
+</p>
+<p>
+    <span style="font-weight: bold">Follow @appmux on twitter</span> To receive updates about #adhesivejs.
+    <span data-require-access="update">Edit</span>
+    <span data-require-access="delete">Delete</span>
+</p>
+<a href="#/blog/post" data-require-access="create">Create new post</a>
+<span data-require-access="admin"> | <a href="#/blog/admin">Administer Blog</a></span>
