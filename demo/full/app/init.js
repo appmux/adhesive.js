@@ -13,17 +13,11 @@ require.config({
     'angularUi': '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min',
 
     // adhesive.js
-    //'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
-    //'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
-    //'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
-    //'angularAuth': '//rawgit.com/appmux/adhesive.js/master/dist/angular-auth',
-    //'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
-
-    'angularConfig': '../lib/adhesivejs/angular-config',
-    'angularModular': '../lib/adhesivejs/angular-modular',
-    'angularCacheBuster': '../lib/adhesivejs/angular-cachebuster',
-    'angularAuth': '../lib/adhesivejs/angular-auth',
-    'angularTitle': '../lib/adhesivejs/angular-title',
+    'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
+    'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
+    'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
+    'angularAuth': '//rawgit.com/appmux/adhesive.js/master/dist/angular-auth',
+    'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
 
     // Third-party libraries
     // Add more third-party libraries as needed.
@@ -190,10 +184,10 @@ require([
                         permissions: ['read', 'create']
                       },
                       superUser = {
-                        permissions: ['read', 'create', 'update']
+                        permissions: ['foo', 'read', 'create', 'update']
                       },
                       adminUser = {
-                        permissions: ['read', 'create', 'update', 'delete', 'admin']
+                        permissions: ['foo', 'bar', 'read', 'create', 'update', 'delete', 'admin']
                       };
 
                     if (credentials.username.indexOf('super') == 0) {

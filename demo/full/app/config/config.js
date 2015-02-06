@@ -6,12 +6,14 @@
 define([], function () {
 
   return {
+
     // Some default options
     default: {
       pageTitle: 'Demo',
       path: '/',
       moduleNotFound: '/module-not-found'
     },
+
     // Options for native angular modules to be configured
     // at the config() stage of bootstrap.
     ngModule: {
@@ -24,12 +26,16 @@ define([], function () {
         ],
         urlParams: {b: BUILD_NUMBER}
       },
+
+      // A list of protected routes, ngAuth will use them to make sure a user
+      // is logged in and has required permissions.
+
+      // ngAuth will also prevent module auto-loading for not authorized users.
       ngAuth: {
         routes: {
-          '/example': {requireAccess: []},
-          '/example/bar': {requireAccess: ['basic-r']},
-          '/example/foo': {requireAccess: ['denied-crud']},
-          '/blog/post': {requireAccess: ['read']}
+          '/example/bar': {requireAccess: []}, // No particular permissions required, just needs to be logged in
+          '/example/foo': {requireAccess: ['foo']},
+          '/blog/post': {requireAccess: ['create']}
         }
       }
     }
