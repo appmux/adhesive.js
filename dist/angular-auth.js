@@ -132,15 +132,12 @@
         }
 
         if (!authService.isLoggedIn()) {
-          event.preventDefault();
-
           authService.setRequestedUri($location.path(), $location.search());
 
-          $location.search({});
-          $location.path('/login');
+          next.resolve = null;
+          next.redirectTo = '/login';
         } else if (!authService.hasAccess(requireAccess)) {
-          $location.search({});
-          $location.path('/access-denied');
+          next.redirectTo = '/access-denied';
         }
       });
     }])
