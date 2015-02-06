@@ -231,7 +231,7 @@ require([
                 var hasAccess = (user && typeof user.permissions == 'object') === true;
 
                 if (hasAccess) {
-                  angular.forEach(requireAccess, function(v, k) {
+                  angular.forEach(requireAccess, function (v, k) {
                     if (user.permissions.indexOf(v) < 0) {
                       hasAccess = false;
                       return false;
