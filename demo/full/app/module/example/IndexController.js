@@ -1,6 +1,6 @@
 'use strict';
 
-define([], function () {
+define('module/example/IndexController', [], function () {
 
   return ['$scope', '$location', function ($scope, $location) {
     $scope.text = 'IndexController';

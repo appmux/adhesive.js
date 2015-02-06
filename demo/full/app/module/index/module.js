@@ -1,6 +1,6 @@
 'use strict';
 
-define([],
+define('module/index', [],
   function () {
 
     var config = {

@@ -1,6 +1,6 @@
 'use strict';
 
-define([], function () {
+define('module/blog/IndexController', [], function () {
 
   return ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
 

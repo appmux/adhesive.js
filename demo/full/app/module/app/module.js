@@ -2,7 +2,7 @@
 
 // Here we tap into ngModular realm. The main thing to understand is all
 // we do here is wrapping native angular functinoality into a form of AMD modules.
-define([],
+define('module/app', [],
   function () {
 
     var config = {

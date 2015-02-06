@@ -6,7 +6,7 @@ require.config({
   }
 });
 
-define([
+define('module/blog', [
     'module/blog/IndexController'
   ],
   function (IndexController) {

@@ -8,7 +8,7 @@ require.config({
   }
 });
 
-define([
+define('module/example', [
     'module/example/IndexController',
     'module/example/FooController',
     'module/example/BarController'
