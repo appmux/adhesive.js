@@ -150,6 +150,16 @@
     }])
     .controller('logoutController', ['authService', function (authService) {
       authService.logOut();
+    }])
+    .directive('requireAccess', ['authService', function (authService) {
+      return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+          if (!authService.hasAccess(attrs.requireAccess)) {
+            element.remove();
+          }
+        }
+      };
     }]);
 
   angular.module('template/auth/login.html', []).run(['$templateCache', function ($templateCache) {
