@@ -12,18 +12,19 @@
  * License: MIT
  */
 
-(function(window, document, angular, undefined) {'use strict';
+(function (window, document, angular, undefined) {
+  'use strict';
 
-    angular.module('ngIntercom', [])
-        .run(['$rootScope', function ($rootScope) {
-            document.addEventListener('ng.intercom.callIn', function (e) {
-                $rootScope.$emit('ng.intercom.callIn', e);
-            });
+  angular.module('ngIntercom', [])
+    .run(['$rootScope', function ($rootScope) {
+      document.addEventListener('ng.intercom.callIn', function (e) {
+        $rootScope.$emit('ng.intercom.callIn', e);
+      });
 
-            $rootScope.$on('ng.intercom.callOut', function (e, data) {
-                var callOut = new CustomEvent('ng.intercom.callOut', {detail: data});
-                document.dispatchEvent(callOut);
-            });
-        }]);
+      $rootScope.$on('ng.intercom.callOut', function (e, data) {
+        var callOut = new CustomEvent('ng.intercom.callOut', {detail: data});
+        document.dispatchEvent(callOut);
+      });
+    }]);
 
 })(window, document, window.angular);
