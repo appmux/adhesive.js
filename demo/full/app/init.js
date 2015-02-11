@@ -16,17 +16,18 @@ require.config({
     'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
     'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
     'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
+    'angularAuth': '//rawgit.com/appmux/adhesive.js/master/dist/angular-auth',
     'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
 
     // Third-party libraries
     // Add more third-party libraries as needed.
     // ...
-    
+
     // In reality, all files above should be bundled together in one file
     // and minified, because we need them all no metter what.
 
     // Application: configuration and modules
-    
+
     // This is the configuration for the entire application. It's a "must have"
     // for enterprise-level applications. Much easier to update one file
     // to change a behaviour of a module, especially if you have a complex
@@ -39,25 +40,26 @@ require.config({
     // by ngModular auto-loader.
     // Reference to any module you ever build for your application using
     // adhesive.js framework should be listed here.
-    
+
     // I like to call my main module "app" because it is what is it.
     // You can call it anything as long as you know it's your main application
     // module. Good alternative names would be:
     // module/main, module/core, etc.
-    
+
     // Main application module is like an ambrella for everything else,
     // its purpose is to define global scope functionality and encapsulate
     // applicaiton wide components, i.e. finters, listeners, etc. commonly used
     // across all application modules.
     // Important: it does not handle any routes.
     'module/app': 'module/app/module',
-    
+
     // The rest of modues are more specific ones to serve specific parts
     // of the applications, like different views and so on. they are packaged
     // accordingly, each will have it's own set or configuration, routes,
     // templates, controllers, services, filters and such.
     'module/index': 'module/index/module',
-    'module/example': 'module/example/module'
+    'module/example': 'module/example/module',
+    'module/blog': 'module/blog/module'
   },
   shim: {
     // Now we need to define all dependencies at the AMD level. So we tell
@@ -74,6 +76,7 @@ require.config({
     'angularConfig': ['angular'],
     'angularModular': ['angular'],
     'angularCacheBuster': ['angular'],
+    'angularAuth': ['angular'],
     'angularTitle': ['angular'],
 
     'module/app': [
@@ -83,6 +86,7 @@ require.config({
       'angularConfig',
       'angularModular',
       'angularCacheBuster',
+      'angularAuth',
       'angularTitle'
     ]
   },
@@ -91,32 +95,32 @@ require.config({
   ]
 });
 
-// We all set up and ready for action. Let'start loading files.
+// We all set up and ready for action. Let's start loading files.
 require([
   'app/config',
   'module/app',
   'module/index'
-], function(config, application, index) {
-  
+], function (config, application, index) {
+
   // Above we listed only modules that we would like to have access to here.
   // They will pull their dependencies needed for the application to work,
   // but we don't really care about them here.
-  angular.element().ready(function() {
-    
+  angular.element().ready(function () {
+
     // Here we do our regular AngularJS set up, we create the main application
     // module and list all the native angular modules as dependencies.
     // Again, I like to call it app, but the name can be different and it has
     // nothing to do with module/app mentioned above.
     angular.module('app', [
-      'ngRoute', 'ngConfig', 'ngModular', 'ngCacheBuster', 'ngTitle', 'ui.bootstrap'
+      'ngRoute', 'ngConfig', 'ngModular', 'ngCacheBuster', 'ngAuth', 'ngTitle', 'ui.bootstrap'
     ])
-    
-      // At the onfiguration stage of angular's bootstrap process we pull some
+
+      // At the configuration stage of angular's bootstrap process we pull some
       // dependencies to configure them. All this stuff is optional and exists
       // here only for demonstration of how it can be done when needed.
-      .config(['configProvider', 'cacheBusterProvider', 'autoLoaderProvider', 'pageTitleProvider',
-        function(configProvider, cacheBusterProvider, autoLoaderProvider, pageTitleProvider) {
-          
+      .config(['configProvider', 'cacheBusterProvider', 'autoLoaderProvider', 'authServiceProvider', 'pageTitleProvider',
+        function (configProvider, cacheBusterProvider, autoLoaderProvider, authServiceProvider, pageTitleProvider) {
+
           // We tell ngConfig to use our configuration object to make it
           // available across the entire application as an injectable
           // dependency 'config'.
@@ -126,14 +130,14 @@ require([
           cacheBusterProvider.setPaths(config.ngModule.ngCacheBuster.paths);
           cacheBusterProvider.setUrlParams(config.ngModule.ngCacheBuster.urlParams);
 
-          // Example of implementaiton of a custom auto-loader's
+          // Example of implementation of a custom auto-loader's
           // path-to-module resolution function.
           autoLoaderProvider.addStrategy({
             name: 'alias',
             resolve: ['$location',
-              function($location) {
+              function ($location) {
                 var moduleName = $location.path().split("/")[1];
-                
+
                 // Simple static definition, but can be implemented
                 // in any custom way.
                 if (moduleName == 'test') {
@@ -143,29 +147,181 @@ require([
             ]
           });
 
+          var authServiceAdapter = ['$http', '$q', function ($http, $q) {
+            var user = null;
+
+            function isLoggedIn() {
+              return user !== null;
+            }
+
+            function register(data) {
+              user = data;
+              //$cookies[authCookie] = user.username;
+            }
+
+            function unregister() {
+              user = null;
+              //delete $cookies[authCookie];
+            }
+
+            return {
+              logIn: function (credentials) {
+
+                // Hard-coded authentication, but we simulate a delay pretending we're making
+                // an auth web service call to log user in.
+                var deferred = $q.defer();
+
+                setTimeout(function () {
+
+                  // You have full access to login form fields via credentials object.
+                  if (credentials.username == credentials.password) {
+                    deferred.reject();
+                    credentials.password = '';
+                    alert('Wrong username and/or password.');
+                  } else {
+                    var user = {
+                        displayName: credentials.username,
+                        permissions: ['read', 'create']
+                      },
+                      superUser = {
+                        permissions: ['foo', 'read', 'create', 'update']
+                      },
+                      adminUser = {
+                        permissions: ['foo', 'bar', 'read', 'create', 'update', 'delete', 'admin']
+                      };
+
+                    if (credentials.username.indexOf('super') == 0) {
+                      angular.extend(user, superUser);
+                    } else if (credentials.username.indexOf('admin') == 0) {
+                      angular.extend(user, adminUser);
+                    }
+
+                    register(user);
+
+                    deferred.resolve({
+                      displayName: credentials.username
+                    });
+                  }
+                }, 1000);
+
+                return deferred.promise;
+              },
+
+              logOut: function () {
+                // Simulate an auth web service call to log user out
+                var deferred = $q.defer();
+
+                setTimeout(function () {
+                  var username = user.username;
+                  unregister();
+
+                  deferred.resolve(username);
+                }, 1000);
+
+                return deferred.promise;
+              },
+
+              isLoggedIn: isLoggedIn,
+
+              hasAccess: function (requireAccess) {
+                if (typeof requireAccess == 'string') {
+                  requireAccess = requireAccess.split(',');
+                }
+
+                var hasAccess = (user && typeof user.permissions == 'object') === true;
+
+                if (hasAccess) {
+                  angular.forEach(requireAccess, function (v, k) {
+                    if (user.permissions.indexOf(v) < 0) {
+                      hasAccess = false;
+                      return false;
+                    }
+                  });
+                }
+
+                return hasAccess;
+              }
+            }
+          }];
+
+          authServiceProvider.setAdapter(authServiceAdapter);
+
+          // This strategy is ngModular specific,
+          // it allows to require authenticate before a module is even loaded
+          // TODO Update to use regex
+          authServiceProvider.addStrategy({
+            name: 'protectedModules',
+            getRequiredAccess: ['$location', function ($location) {
+              var protectedRoutes = config.ngModule.ngAuth.routes,
+                path = $location.path(),
+                requireAccess;
+
+              if (protectedRoutes.hasOwnProperty(path)) {
+                if (protectedRoutes[path].hasOwnProperty('requireAccess')) {
+                  requireAccess = protectedRoutes[path].requireAccess;
+                } else {
+                  // According to our authServiceAdapter, empty object/array requires user to be logged in.
+                  requireAccess = [];
+                }
+              }
+
+              return requireAccess;
+            }]
+          });
+
           // Optional configuration for ngTitle
           pageTitleProvider.setPostfix(config.default.pageTitle);
           //pageTitleProvider.setDelimiter(' | ');
         }
-      ]);
-      
-      // Here we call the ngModular module that will drive the rest of the
-      // application. This very module allows to have the application better
-      // organized in sense of files and module structure and dynamically load
-      // application modules on demand.
-      
-      // So let's bootstrap this thing up!
-      // Note, on the background, ngModular calls the regular bootstrap process
-      // that will engage the 'app' module defined in the section above
-      // and will run it throung the config and run stages.
-      
-      // One little thing to note, here we tell ngModular to automatically
-      // pre-load two application modules:
-      // application - which is the main module/app, and
-      // index - which is the default view module that handles the root #/ route
-      angular.module('ngModular').bootstrap(document, ['app'], [application, index]);
-      
-      // Our application has started, so let's see how it works, proceed to the
-      // app/module/app/module.js file, I'll meet you there.
+      ])
+      .run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
+
+        // When user has been logged in.
+        $rootScope.$on('ngAuth.loggedIn', function (event, data) {
+          var requestedUri = authService.getRequestedUri(),
+            path = typeof requestedUri == 'object' && requestedUri.hasOwnProperty('path') ? requestedUri.path : config.default.path,
+            search = typeof requestedUri == 'object' && requestedUri.hasOwnProperty('search') ? requestedUri.search : {};
+
+          // Capture username, so we can use it later in our UI, i.e. to display the name of logged in user.
+          data.loggedIn = true;
+          data.hasAccess = function (requireAccess) {
+            return authService.hasAccess(requireAccess);
+          };
+
+          $rootScope.auth = data;
+
+          // Redirect to the originally requested URL, after log in.
+          $location.path(path).search(search);
+        });
+
+        // When a user has been logged out.
+        $rootScope.$on('ngAuth.loggedOut', function (event, data) {
+
+          // Reset auth object.
+          delete $rootScope.auth;
+
+          // Redirect to the default path on log out.
+          $location.path(config.default.path).search({});
+        });
+      }]);
+
+    // Here we call the ngModular module that will drive the rest of the
+    // application. This very module allows to have the application better
+    // organized in sense of files and module structure and dynamically load
+    // application modules on demand.
+
+    // So let's bootstrap this thing up!
+    // Note, on the background, ngModular calls the regular bootstrap process
+    // that will engage the 'app' module defined in the section above
+    // and will run it throung the config and run stages.
+
+    // One little thing to note, here we tell ngModular to automatically
+    // pre-load two application modules:
+    // application - which is the main module/app, and
+    // index - which is the default view module that handles the root #/ route
+    angular.module('ngModular').bootstrap(document, ['app'], [application, index]);
+
+    // Our application has started, so let's see how it works, proceed to the
+    // app/module/app/module.js file, I'll meet you there.
   });
 });
