@@ -277,7 +277,7 @@ require([
       .run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
 
         // When user has been logged in.
-        $rootScope.$on('ng.auth.loggedIn', function (event, data) {
+        $rootScope.$on('ngAuth.loggedIn', function (event, data) {
           var requestedUri = authService.getRequestedUri(),
             path = typeof requestedUri == 'object' && requestedUri.hasOwnProperty('path') ? requestedUri.path : config.default.path,
             search = typeof requestedUri == 'object' && requestedUri.hasOwnProperty('search') ? requestedUri.search : {};
@@ -295,7 +295,7 @@ require([
         });
 
         // When a user has been logged out.
-        $rootScope.$on('ng.auth.loggedOut', function (event, data) {
+        $rootScope.$on('ngAuth.loggedOut', function (event, data) {
 
           // Reset auth object.
           delete $rootScope.auth;

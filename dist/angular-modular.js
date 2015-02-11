@@ -80,7 +80,7 @@
                 }
 
                 if (!moduleName) {
-                  $rootScope.$broadcast('moduleNotFound', {name: moduleName});
+                  $rootScope.$broadcast('ngModular.notFound', {name: moduleName});
                   return;
                 }
 
@@ -91,10 +91,10 @@
                   function onLoad(module) {
                     moduleLoader.init(module);
                     deferred.reject();
-                    $rootScope.$broadcast('moduleLoaded', {name: moduleName});
+                    $rootScope.$broadcast('ngModular.loaded', {name: moduleName});
                   }, function onError(e) {
                     deferred.reject();
-                    $rootScope.$broadcast('moduleNotFound', {name: moduleName});
+                    $rootScope.$broadcast('ngModular.notFound', {name: moduleName});
                   });
 
                 return deferred.promise;
@@ -188,7 +188,7 @@
           if (config.routes) {
             injector.invoke(['$rootScope', function ($rootScope) {
               angular.forEach(config.routes, function (options, route) {
-                $rootScope.$broadcast('moduleRoutePreProcess', route, options);
+                $rootScope.$broadcast('ngModular.routePreProcess', route, options);
 
                 if (options.controller) {
                   options.controller = controllerNamePrefix + options.controller;
@@ -250,11 +250,11 @@
 
         modular.routeProvider.otherwise(autoLoader.resolve);
 
-        $rootScope.$on('moduleLoaded', function (event, module) {
+        $rootScope.$on('ngModular.loaded', function (event, module) {
           $route.reload();
         });
 
-        $rootScope.$broadcast('moduleLoaded');
+        $rootScope.$broadcast('ngModular.loaded');
       }]);
   };
 

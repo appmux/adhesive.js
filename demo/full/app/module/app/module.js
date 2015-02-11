@@ -40,7 +40,7 @@ define('module/app', [],
 
         // For example, we set a hndler for 'moduleNotFound' event that
         // simply forwards to the module not found page.
-        $rootScope.$on('moduleNotFound', function (event, module) {
+        $rootScope.$on('ngModular.notFound', function (event, module) {
           $location.path(config.default.moduleNotFound);
         });
       }

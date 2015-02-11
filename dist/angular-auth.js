@@ -73,14 +73,14 @@
         logIn: function (credentials) {
           $q.when(authServiceAdapter.logIn(credentials))
             .then(function (result) {
-              $rootScope.$broadcast('ng.auth.loggedIn', result);
+              $rootScope.$broadcast('ngAuth.loggedIn', result);
             });
         },
 
         logOut: function () {
           $q.when(authServiceAdapter.logOut())
             .then(function (result) {
-              $rootScope.$broadcast('ng.auth.loggedOut', result);
+              $rootScope.$broadcast('ngAuth.loggedOut', result);
             });
         },
 
