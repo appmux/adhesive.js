@@ -7,7 +7,7 @@
  * - Set the title from the template using data-page-title element ot attribute,
  *   with support for bound variables.
  *
- * @license adhesive.js 1.0.3
+ * @license adhesive.js 1.0.4
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh
