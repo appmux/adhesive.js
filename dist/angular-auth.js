@@ -8,7 +8,7 @@
  * - Flexible for development.
  * - Provides ability to build secure applications.
  *
- * @license adhesive.js 1.0.3
+ * @license adhesive.js 1.0.4
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh
@@ -73,14 +73,14 @@
         logIn: function (credentials) {
           $q.when(authServiceAdapter.logIn(credentials))
             .then(function (result) {
-              $rootScope.$broadcast('ng.auth.loggedIn', result);
+              $rootScope.$broadcast('ngAuth.loggedIn', result);
             });
         },
 
         logOut: function () {
           $q.when(authServiceAdapter.logOut())
             .then(function (result) {
-              $rootScope.$broadcast('ng.auth.loggedOut', result);
+              $rootScope.$broadcast('ngAuth.loggedOut', result);
             });
         },
 

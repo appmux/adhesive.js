@@ -6,7 +6,7 @@
  * - Make your modules flexible via configuration.
  * - Build your modules application agnostic, independent and sharable.
  *
- * @license adhesive.js 1.0.3
+ * @license adhesive.js 1.0.4
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh

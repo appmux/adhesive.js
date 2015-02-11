@@ -5,7 +5,7 @@
  * - Send events to AngularJS application from outside world.
  * - Send events to outside world from AngularJS application.
  *
- * @license adhesive.js 1.0.3
+ * @license adhesive.js 1.0.4
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh
@@ -17,12 +17,12 @@
 
   angular.module('ngIntercom', [])
     .run(['$rootScope', function ($rootScope) {
-      document.addEventListener('ng.intercom.callIn', function (e) {
-        $rootScope.$emit('ng.intercom.callIn', e);
+      document.addEventListener('ngIntercom.callIn', function (e) {
+        $rootScope.$emit('ngIntercom.callIn', e);
       });
 
-      $rootScope.$on('ng.intercom.callOut', function (e, data) {
-        var callOut = new CustomEvent('ng.intercom.callOut', {detail: data});
+      $rootScope.$on('ngIntercom.callOut', function (e, data) {
+        var callOut = new CustomEvent('ngIntercom.callOut', {detail: data});
         document.dispatchEvent(callOut);
       });
     }]);

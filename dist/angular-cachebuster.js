@@ -8,7 +8,7 @@
  * - Keep static files cacheable in production environment between versions.
  * - No server configuration needed.
  *
- * @license adhesive.js 1.0.3
+ * @license adhesive.js 1.0.4
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh
