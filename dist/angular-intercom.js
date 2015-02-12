@@ -5,7 +5,7 @@
  * - Send events to AngularJS application from outside world.
  * - Send events to outside world from AngularJS application.
  *
- * @license adhesive.js 1.0.4
+ * @license adhesive.js 1.0.5
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh

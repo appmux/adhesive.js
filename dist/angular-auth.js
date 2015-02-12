@@ -8,7 +8,7 @@
  * - Flexible for development.
  * - Provides ability to build secure applications.
  *
- * @license adhesive.js 1.0.4
+ * @license adhesive.js 1.0.5
  * @url https://github.com/appmux/adhesive.js
  * @author Alexander Korzh
  * Copyright (c) 2014 Alexander Korzh
