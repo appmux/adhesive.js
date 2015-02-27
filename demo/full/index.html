@@ -20,6 +20,7 @@ directive, we are not doing auto-bootstrap.
   I'm using bootstrap.css to give this demo a better look.
   -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
   <!--
   Build number is very important thing here. It's used for cache buster
   to make sure all files are up to date on every load during the development
@@ -34,11 +35,15 @@ directive, we are not doing auto-bootstrap.
 </head>
 
 <body>
-<header class="container">
-  <h1>adhesive.js for AngularJS applications</h1>
-  <h4>Full-scale demo and tutorial</h4>
+<header>
+  <div class="container">
+    <h1>adhesive.js for AngularJS applications</h1>
+    <h4>Full-scale demo and tutorial</h4>
+  </div>
+</header>
 
-  <p>This sample application is built based on <b>ngModular</b>, which automatically resolves
+<div class="container">
+<p>This sample application is built based on <b>ngModular</b>, which automatically resolves
     paths and downloads application modules on demand, as you walk through
     the app. See it in action by watching the <b>Network tab</b>
     in the developer console.</p>
@@ -72,7 +77,7 @@ directive, we are not doing auto-bootstrap.
     </li>
   </ul>
   <hr>
-</header>
+  </div>
 
 <section class="container" id="body">
   <!--

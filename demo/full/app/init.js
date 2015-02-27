@@ -13,11 +13,17 @@ require.config({
     'angularUi': '//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min',
 
     // adhesive.js
-    'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
-    'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
-    'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
-    'angularAuth': '//rawgit.com/appmux/adhesive.js/master/dist/angular-auth',
-    'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
+    //'angularConfig': '//rawgit.com/appmux/adhesive.js/master/dist/angular-config',
+    //'angularModular': '//rawgit.com/appmux/adhesive.js/master/dist/angular-modular',
+    //'angularCacheBuster': '//rawgit.com/appmux/adhesive.js/master/dist/angular-cachebuster',
+    //'angularAuth': '//rawgit.com/appmux/adhesive.js/master/dist/angular-auth',
+    //'angularTitle': '//rawgit.com/appmux/adhesive.js/master/dist/angular-title',
+
+    'angularConfig': '../../../dist/angular-config',
+    'angularModular': '../../../dist/angular-modular',
+    'angularCacheBuster': '../../../dist/angular-cachebuster',
+    'angularAuth': '../../../dist/angular-auth',
+    'angularTitle': '../../../dist/angular-title',
 
     // Third-party libraries
     // Add more third-party libraries as needed.
